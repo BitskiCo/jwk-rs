@@ -84,7 +84,7 @@ pub struct JsonWebKey {
     pub key: Box<Key>,
 
     #[serde(default, rename = "use", skip_serializing_if = "Option::is_none")]
-    pub key_use: Option<KeyUse>,
+    pub key_use: Option<String>,
 
     #[serde(default, skip_serializing_if = "KeyOps::is_empty")]
     pub key_ops: KeyOps,
@@ -523,14 +523,6 @@ impl fmt::Debug for RsaPrivate {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.write_str("RsaPrivate")
     }
-}
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
-pub enum KeyUse {
-    #[serde(rename = "sig")]
-    Signing,
-    #[serde(rename = "enc")]
-    Encryption,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
